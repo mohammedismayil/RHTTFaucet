@@ -386,6 +386,8 @@ app.post("/receivetoken", (req, res) => {
     }
   });
 });
+// ADD THIS LINE
+app.use(express.static('../build'));
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
 });

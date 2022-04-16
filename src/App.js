@@ -9,7 +9,7 @@ function App() {
     console.log("You clicked submit.");
     console.log(address);
 
-    fetch("http://localhost:5000/receivetoken", {
+    fetch("/receivetoken", {
       method: "POST",
       headers: new Headers({
         "Content-Type": "application/x-www-form-urlencoded", // <-- Specifying the Content-Type
