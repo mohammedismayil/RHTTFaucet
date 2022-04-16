@@ -1,9 +1,10 @@
 const express = require("express");
+require("dotenv").config();
 const app = express();
 const port = 5000;
 const Web3 = require("web3");
-const web3 = new Web3(new Web3.providers.HttpProvider("your url"));
-const privateKey = ""; //Your Private key environment variable
+const web3 = new Web3(new Web3.providers.HttpProvider(process.env.Ropsten_url));
+const privateKey = process.env.Private_key; //Your Private key environment variable
 
 let tokenAddress = "0x907cCf3732AcA4ED271A9b71F679901AbfB8c1C9"; // Demo Token contract address
 
@@ -368,17 +369,20 @@ app.post("/receivetoken", (req, res) => {
       // return callback(err);
     } else {
       console.log(signedTx);
-      res.json({ message: signedTx });
-      //   return web3.eth.sendSignedTransaction(
-      //     signedTx.rawTransaction,
-      //     (err, res) => {
-      //       if (err) {
-      //         console.log(err);
-      //       } else {
-      //         console.log(res);
-      //       }
-      //     }
-      //   );
+
+      return web3.eth.sendSignedTransaction(
+        signedTx.rawTransaction,
+        (err, respo) => {
+          if (err) {
+            console.log(err);
+            // res.json({ message: err });
+            err.json({ message: err });
+          } else {
+            console.log(respo);
+            res.json({ transactionHash: respo });
+          }
+        }
+      );
     }
   });
 });

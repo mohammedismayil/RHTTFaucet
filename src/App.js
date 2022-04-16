@@ -24,7 +24,7 @@ function App() {
         return responseData;
       })
       .then((data) => {
-        setTXHash(data.message.transactionHash);
+        setTXHash(data.transactionHash);
       })
 
       .catch((err) => {
@@ -48,7 +48,7 @@ function App() {
         <input type="submit" value="Submit" />
       </form>
 
-      <h3>{transactionHash}</h3>
+      <h3>Transaction Hash: {transactionHash}</h3>
     </div>
   );
 }
