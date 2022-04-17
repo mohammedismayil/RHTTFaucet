@@ -38,28 +38,36 @@ function App() {
 
   // }
   return (
-    <div className=" flex-col flex  m-auto items-center bg-slate-200 h-screen">
-      <div className="bg-white p-10 rounded font-bold m-10 items-center ">
+    <div className=" flex-col flex  m-auto items-center bg-slate-200 h-screen ">
+      <div className="bg-white p-10 rounded font-bold m-10 items-center w-1/2 ">
         <h2 className="font-bold text-3xl text-center">
           RHTT(ERC20) Testnet faucet
         </h2>
         <form onSubmit={handleSubmit}>
-          <input
-            className="shadow appearance-none border-2 border-indigo-500/100 rounded w-full py-2  my-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="username"
-            type="text"
-            placeholder="Enter your address here"
-            onChange={(e) => setAddress(e.target.value)}
-          ></input>
-          <button
-            type="submit"
-            className=" w-full flex justify-center py-2   border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-          >
-            Send RHTT
-          </button>
+          <div className="flex justify-center content-center pt-5 pb-5">
+            <input
+              className="shadow appearance-none border-2 w-1/2 border-indigo-500/100 rounded  py-2  my-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="username"
+              type="text"
+              placeholder="Enter your address here"
+              onChange={(e) => setAddress(e.target.value)}
+            ></input>
+          </div>
+          <div className="flex justify-center content-center ">
+            <button
+              type="submit"
+              className=" w-1/4 flex justify-center content-center py-2   border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            >
+              Send RHTT
+            </button>
+          </div>
         </form>
         {transactionHash ? (
-          <h3 className="pt-5">Transaction Hash: {transactionHash}</h3>
+          <div className="flex justify-center content-center ">
+            <h3 className="pt-10  mx-5 justify-center content-center text-center">
+              Transaction Hash: {transactionHash}
+            </h3>
+          </div>
         ) : null}
       </div>
     </div>
