@@ -3,9 +3,14 @@ require("dotenv").config();
 const app = express();
 const port = 5000;
 const Web3 = require("web3");
-const web3 = new Web3(new Web3.providers.HttpProvider(process.env.Ropsten_url));
-const privateKey = process.env.Private_key; //Your Private key environment variable
+const web3 = new Web3(new Web3.providers.HttpProvider(process.env['Ropsten_url']));
+const privateKey = process.env['Private_key'];
 
+//Your Private key environment variable
+
+
+// const web3 = new Web3(new Web3.providers.HttpProvider(process.env.Ropsten_url));
+// const privateKey = process.env.Private_key; 
 let tokenAddress = "0x907cCf3732AcA4ED271A9b71F679901AbfB8c1C9"; // Demo Token contract address
 
 let toAddress = "0xc9e1bD5A93cf631716D3e71e20Ac9A3b2DF60008"; // where to send it

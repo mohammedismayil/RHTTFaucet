@@ -40,7 +40,9 @@ function App() {
   return (
     <div className=" flex-col flex  m-auto items-center bg-slate-200 h-screen">
       <div className="bg-white p-10 rounded font-bold m-10 items-center ">
-        <h2 className="font-bold text-3xl">RHTT(ERC20) Testnet faucet</h2>
+        <h2 className="font-bold text-3xl text-center">
+          RHTT(ERC20) Testnet faucet
+        </h2>
         <form onSubmit={handleSubmit}>
           <input
             className="shadow appearance-none border-2 border-indigo-500/100 rounded w-full py-2  my-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -56,7 +58,9 @@ function App() {
             Send RHTT
           </button>
         </form>
-        {transactionHash ? <h3>Transaction Hash: {transactionHash}</h3> : null}
+        {transactionHash ? (
+          <h3 className="pt-5">Transaction Hash: {transactionHash}</h3>
+        ) : null}
       </div>
     </div>
   );
