@@ -381,7 +381,10 @@ app.post("/receivetoken", (req, res) => {
           if (err) {
             console.log(err);
             // res.json({ message: err });
-            err.json({ message: err });
+            res.json({
+              message:
+                "looks like sometheing has happened.Mostly it should be the pending transaction",
+            });
           } else {
             console.log(respo);
             res.json({ transactionHash: respo });
