@@ -6,6 +6,7 @@ const port = 5000;
 main().catch((err) => console.log(err));
 const Web3 = require("web3");
 const { contractABI } = require("./contract");
+const cron = require("node-cron");
 
 // let Mongodb_url = ;
 async function main() {
@@ -112,3 +113,14 @@ async function searchAddress(address, res, txObj) {
     });
   }
 }
+
+// cron job to clear the stored address everyday
+cron.schedule("0 0 0 * * *", async function () {
+  console.log("running a task everyday at 12:00am");
+
+  return deleteOldData();
+});
+
+const deleteOldData = async () => {
+  await Kitten.deleteMany({});
+};
