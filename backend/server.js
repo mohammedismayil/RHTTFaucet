@@ -64,6 +64,9 @@ app.post("/receivetoken", (req, res) => {
 app.use(express.static("../build"));
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
+
+  //deleting all addresses stored in db whenever the server has been started
+  deleteOldData();
 });
 
 async function searchAddress(address, res, txObj) {
