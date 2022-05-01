@@ -1,15 +1,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
+// import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./Home";
+import SendToAddress from "./SendToAddress";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+ function App() {
+   return (
+     <BrowserRouter>
+       <Routes>
+         <Route path="/" element={<Home />}>
+           <Route exact path="address" element={<SendToAddress />}></Route>
+         </Route>
+       </Routes>
+     </BrowserRouter>
+   );
+ }
+
+ const root = ReactDOM.createRoot(document.getElementById("root"));
+
+ root.render(<App />);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
