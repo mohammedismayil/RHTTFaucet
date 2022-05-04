@@ -13,41 +13,28 @@ export default function SendToAddress() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log("You clicked submit.");
-    console.log(address);
 
-    if (window.ethereum) {
-      // Do something
-      console.log("Ethereum enabled");
-      window.ethereum.request({ method: "eth_requestAccounts" }).then((res) => {
-        // Return the address of the wallet
-        console.log(res[0]);
+    fetch("/receivetoken", {
+      method: "POST",
+      headers: new Headers({
+        "Content-Type": "application/x-www-form-urlencoded", // <-- Specifying the Content-Type
+      }),
+      body: "toAddress=" + address, // <-- Post parameters
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((responseData) => {
+        console.log(responseData);
+        return responseData;
+      })
+      .then((data) => {
+        setTXHash(data.transactionHash);
+      })
+
+      .catch((err) => {
+        console.log("fetch error" + err);
       });
-    } else {
-      alert("install metamask extension!!");
-    }
-
-    // fetch("/receivetoken", {
-    //   method: "POST",
-    //   headers: new Headers({
-    //     "Content-Type": "application/x-www-form-urlencoded", // <-- Specifying the Content-Type
-    //   }),
-    //   body: "toAddress=" + address, // <-- Post parameters
-    // })
-    //   .then((response) => {
-    //     return response.json();
-    //   })
-    //   .then((responseData) => {
-    //     console.log(responseData);
-    //     return responseData;
-    //   })
-    //   .then((data) => {
-    //     setTXHash(data.transactionHash);
-    //   })
-
-    //   .catch((err) => {
-    //     console.log("fetch error" + err);
-    //   });
     // sendErcToken();
   }
 
@@ -57,10 +44,12 @@ export default function SendToAddress() {
   return (
     <div className=" flex-col flex  m-auto items-center bg-slate-200 h-screen ">
       <div className="bg-white p-10 rounded font-bold m-10 items-center w-1/2 ">
-        <h2 className="font-bold text-3xl text-center">
-          RHTT(ERC20) Testnet faucet
-        </h2>
-        <Link to="/address">Home</Link>
+        <Link to="/">
+          <h2 className="font-bold text-3xl text-center">
+            RHTT(ERC20) Testnet faucet
+          </h2>
+        </Link>
+
         <form onSubmit={handleSubmit}>
           <div className="flex justify-center content-center pt-5 pb-5">
             <input

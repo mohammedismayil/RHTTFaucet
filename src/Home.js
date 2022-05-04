@@ -9,31 +9,64 @@ export default function Home() {
   // Similar to componentDidMount and componentDidUpdate:
 
   useEffect(() => {
-    console.log("use effect has been called");
-    connectToMetamask();
-  });
+    checkIfWalletIsConnected(setAddress);
+  }, []);
 
+  // useEffect(() => {
+  //   onAddressChanged(address);
+  // }, [address]);
+  // useEffect(() => {
+  //   console.log("use effect has been called");
+  //   // connectToMetamask();
+  // });
+
+  async function checkIfWalletIsConnected(onConnected) {
+    if (window.ethereum) {
+      const accounts = await window.ethereum.request({
+        method: "eth_accounts",
+      });
+
+      if (accounts.length > 0) {
+        const account = accounts[0];
+        // console.log("accounts length");
+        // console.log(account);
+        setMetaMask(true);
+        setAddress(account);
+        return;
+      }
+    }
+  }
   function connectToMetamask() {
     if (window.ethereum) {
       // Do something
       console.log("Ethereum enabled");
-      window.ethereum.request({ method: "eth_requestAccounts" }).then((res) => {
-        // Return the address of the wallet
-        console.log(res[0]);
 
-        setMetaMask(true);
-        setAddress(res[0]);
-      });
+      const chainId = 3; // Polygon Mainnet
+
+      console.log(window.ethereum.networkVersion);
+      if (window.ethereum.networkVersion != chainId) {
+        alert("Change to ropsten testnet");
+      } else {
+        window.ethereum
+          .request({ method: "eth_requestAccounts" })
+          .then((res) => {
+            // Return the address of the wallet
+            // console.log(res[0]);
+
+            setMetaMask(true);
+            setAddress(res[0]);
+          });
+      }
     } else {
       alert("install metamask extension!!");
     }
   }
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    console.log("You clicked submit.");
-    console.log(address);
-  }
+  // function handleSubmit(e) {
+  //   e.preventDefault();
+  //   console.log("You clicked submit.");
+  //   console.log(address);
+  // }
 
   function sendErcToken() {
     fetch("/receivetoken", {
@@ -65,7 +98,7 @@ export default function Home() {
         <h2 className="font-bold text-3xl text-center">
           RHTT(ERC20) Testnet faucet
         </h2>
-
+        {/* <Link to="/address">Home</Link> */}
         {isMetaMaskEnabled ? (
           <div className="flex justify-center content-center p-10">
             <h2>Wallet connected:{address}</h2>

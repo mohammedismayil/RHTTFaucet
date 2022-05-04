@@ -11,9 +11,8 @@ import SendToAddress from "./SendToAddress";
    return (
      <BrowserRouter>
        <Routes>
-         <Route path="/" element={<Home />}>
-           <Route exact path="address" element={<SendToAddress />}></Route>
-         </Route>
+         <Route path="/" element={<Home />}></Route>
+         <Route exact path="address" element={<SendToAddress />}></Route>
        </Routes>
      </BrowserRouter>
    );
